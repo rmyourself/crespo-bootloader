@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (c) 2008, Google Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,20 +26,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _BOARD_H_
-#define _BOARD_H_
+#ifndef __ASM_ARCH_MSM7200_PANEL_H
+#define __ASM_ARCH_MSM7200_PANEL_H
 
-/* low-level init and partition table setup */
-void board_init(void);
-void board_hang(void);
-void board_reboot(void);
-void board_getvar(const char *name, char *value);
-
-/* keypad init */
-void keypad_init(void);
-
-/* return a linux kernel commandline */
-const char *board_cmdline(void);
-unsigned board_machtype(void);
 
 #endif

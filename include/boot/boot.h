@@ -55,8 +55,6 @@ static inline unsigned readl(unsigned addr)
     return (*(volatile unsigned *) (addr));
 }
 
-int dcc_putc(unsigned c);
-int dcc_getc();
 
 void enable_irq(void);
 
@@ -71,8 +69,6 @@ extern void key_changed(unsigned int key, unsigned int is_down) __attribute__ ((
 void boot_register_poll_func(void (*func)(void));
 void boot_poll(void);
 
-/* console.c */
-void dcc_init();
 
 void dprintf(const char *fmt, ...);
 void dprintf_set_putc(void (*func)(unsigned));

@@ -554,7 +554,8 @@ int flash_read_ext(ptentry *ptn, unsigned extra_per_page, unsigned offset, void 
 
         /* could not find enough valid pages before we hit the end */
     dprintf("flash_read_image: failed (%d errors)\n", errors);
-    return 0xffffffff;
+//    return 0xffffffff;
+	return -1;
 }
 
 int flash_write(ptentry *ptn, unsigned extra_per_page, const void *data, unsigned bytes)

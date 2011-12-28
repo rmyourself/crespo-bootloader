@@ -26,20 +26,93 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _BOARD_H_
-#define _BOARD_H_
+.global irq_glue
+.global irq_vector_table
 
-/* low-level init and partition table setup */
-void board_init(void);
-void board_hang(void);
-void board_reboot(void);
-void board_getvar(const char *name, char *value);
+#include <boot/arm.h>
 
-/* keypad init */
-void keypad_init(void);
+.globl _start
+_start:	
+	b	reset
+ 	ldr	pc, _hang
+	ldr	pc, _hang
+	ldr	pc, _hang
+	ldr	pc, _hang
+	ldr	pc, _hang
+	ldr	pc, _hang
+	ldr	pc, _hang
 
-/* return a linux kernel commandline */
-const char *board_cmdline(void);
-unsigned board_machtype(void);
 
-#endif
+_hang:
+ 	.word do_hang
+	
+	.word 0x12345678
+	.word 0x12345678
+	.word 0x12345678
+	.word 0x12345678
+	.word 0x12345678
+	.word 0x12345678
+	.word 0x12345678 /* now 16*4=64 */
+
+reset:
+	.type _start,#function
+	ldr r5, =0xfffff000
+	ands r4, pc, r5
+	beq already_at_zero
+
+	/* we're not loaded at 0 -- relocate us back down to where we belong */
+	mov r5, #0
+@	ldr r6, =BOOTLOADER_END
+1:	ldr r7, [r4], #4
+	str r7, [r5], #4
+	cmp r5, r6
+	bne 1b
+		
+	mov pc, #0
+
+already_at_zero:		
+	/* save registers for main() */
+	mov r7, r0
+	mov r8, r1
+	mov r9, r2
+	mov r10, r3
+
+	/* init stack */
+@	ldr r0, =BOOTLOADER_STACK
+	msr cpsr_c, #(PSR_I | PSR_F | PSR_SVC)
+	mov sp, r0
+
+	/* zero the BSS */
+@	ldr r1, =BOOTLOADER_BSS
+@	ldr r2, =BOOTLOADER_END
+	mov r0, #0
+1:	str r0, [r1], #4
+	cmp r1, r2
+	ble 1b
+		
+@	bl periph_2gb_open
+
+	/* restore registers for main() */
+	mov r0, r7
+	mov r1, r8
+	mov r2, r9
+	mov r3, r10
+		
+	ldr r4, =_main
+	blx r4
+	b .
+
+_TEXT_BASE:
+	.word	TEXT_BASE
+
+.globl _armboot_start
+_armboot_start:
+	.word _start
+
+/*
+ * exception handler
+ */
+ 	.align  5
+do_hang:
+	ldr	sp, _TEXT_BASE		/* use 32 words abort stack */
+   	bl	do_hang			/* hang and never return */

@@ -28,9 +28,10 @@
 
 char data[3];
 
-extern unsigned BOOTLOADER_INIT_FIRST;
-extern unsigned BOOTLOADER_INIT_LAST;
-
+//extern unsigned BOOTLOADER_INIT_FIRST;
+//extern unsigned BOOTLOADER_INIT_LAST;
+unsigned BOOTLOADER_INIT_FIRST;
+unsigned BOOTLOADER_INIT_LAST;
 void call_init_hooks()
 {
 	unsigned x;

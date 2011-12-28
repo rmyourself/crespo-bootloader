@@ -30,7 +30,7 @@
 #include <msm7k/vic.h>
 #include <msm7k/irqs.h>
 
-extern irq_handler irq_vector_table[NR_IRQS];
+irq_handler irq_vector_table[NR_IRQS];
 
 void unknown_handler(unsigned n)
 {
@@ -67,7 +67,7 @@ void irq_init(void)
     writel(1, VIC_INT_MASTEREN);
     
         /* enable IRQs */
-    enable_irq();
+//    enable_irq();
 
     (void) readl(VIC_IRQ_VEC_RD);
 }

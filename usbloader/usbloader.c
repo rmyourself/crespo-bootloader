@@ -37,6 +37,7 @@
 #include <boot/gpio.h>
 
 #define VERSION "0.5"
+#define PRODUCTNAME "herring"
 
 #define REQUIRE_SIGNATURE 0
 

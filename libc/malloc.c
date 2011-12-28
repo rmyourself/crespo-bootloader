@@ -26,7 +26,8 @@
  * SUCH DAMAGE.
  */
 
-extern unsigned BOOTLOADER_HEAP;
+//extern unsigned BOOTLOADER_HEAP;
+unsigned BOOTLOADER_HEAP;
 
 static unsigned __alloc_next = (unsigned) &BOOTLOADER_HEAP;
     

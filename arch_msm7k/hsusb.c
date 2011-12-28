@@ -339,8 +339,12 @@ void ulpi_write(unsigned val, unsigned reg)
     while(readl(USB_ULPI_VIEWPORT) & ULPI_RUN) ;
 }
 
-void board_usb_init(void);
-void board_ulpi_init(void);
+void board_usb_init(void)
+{
+}
+void board_ulpi_init(void)
+{
+}
 
 void usb_init(void) 
 {

@@ -29,7 +29,7 @@
 #ifndef _EMBEDDED_SHA_H_
 #define _EMBEDDED_SHA_H_
 
-#include <inttypes.h>
+#include "inttypes.h"
 
 #ifdef __cplusplus
 extern "C" {

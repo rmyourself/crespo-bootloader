@@ -26,20 +26,14 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _BOARD_H_
-#define _BOARD_H_
+#ifndef _INCLUDE_BOOT_PANEL_H_
+#define _INCLUDE_BOOT_PANEL_H_
 
-/* low-level init and partition table setup */
-void board_init(void);
-void board_hang(void);
-void board_reboot(void);
-void board_getvar(const char *name, char *value);
+/* lcd panel initialization */
+struct mddi_client_caps;
 
-/* keypad init */
-void keypad_init(void);
-
-/* return a linux kernel commandline */
-const char *board_cmdline(void);
-unsigned board_machtype(void);
+void panel_poweron(void);
+void panel_init(struct mddi_client_caps *caps);
+void panel_backlight(int on);
 
 #endif

@@ -32,7 +32,7 @@
 #include <boot/flash.h>
 #include <boot/board.h>
 
-#include <bootimg.h>
+#include <boot/bootimg.h>
 
 #define FLASH_PAGE_SIZE 2048
 #define FLASH_PAGE_BITS 11
@@ -189,10 +189,6 @@ static struct tag_handler tag_dump_handler = {
     .type = 0,
 };
 
-void xdcc_putc(unsigned x)
-{
-    while (dcc_putc(x) < 0) ;
-}
 
 #define SERIALNO_STR "androidboot.serialno="
 #define SERIALNO_LEN strlen(SERIALNO_STR)

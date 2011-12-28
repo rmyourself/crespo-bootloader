@@ -29,7 +29,7 @@
 #ifndef _EMBEDDED_RSA_H_
 #define _EMBEDDED_RSA_H_
 
-#include <inttypes.h>
+#include "inttypes.h"
 
 #ifdef __cplusplus
 extern "C" {
